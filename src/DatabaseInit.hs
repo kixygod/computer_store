@@ -1,8 +1,10 @@
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Use when" #-}
 module DatabaseInit where
 
-import Data.String (fromString)
-import Database.SQLite.Simple
-import System.Directory (doesFileExist, removeFile)
+import           Data.String            (fromString)
+import           Database.SQLite.Simple
+import           System.Directory       (doesFileExist, removeFile)
 
 initializeDB :: IO ()
 initializeDB = do
@@ -12,7 +14,7 @@ initializeDB = do
   -- Если существует, удаляем
   if dbExists
     then do
-      putStrLn "Database exists. Deleting..."
+      -- putStrLn "Database exists. Deleting..."
       removeFile "computer_store.db"
     else return ()
 
@@ -192,5 +194,6 @@ initializeDB = do
   execute_ conn (fromString "INSERT INTO graphics_cards (name, memory_size, memory_type, core_clock_speed, manufacture_id, price) VALUES ('AMD Radeon RX 5700 XT', 8, 'GDDR6', 1.755, 2, 45000);")
   execute_ conn (fromString "INSERT INTO graphics_cards (name, memory_size, memory_type, core_clock_speed, manufacture_id, price) VALUES ('NVIDIA GeForce GTX 1660 Super', 6, 'GDDR6', 1.785, 3, 22000);")
 
-  putStrLn "Database initialized and populated with data."
+  putStrLn "Курсовой проект выполнен Ерёминым Б.Е. гр. 421-2."
+  putStrLn "База данных инициализирована и готова к работе."
   close conn

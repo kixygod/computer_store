@@ -473,7 +473,7 @@ addProduct conn categoryId boxId price = do
 addToCart :: Connection -> Int -> Int -> IO ()
 addToCart conn userId productId = do
   execute conn (fromString "INSERT INTO cart_items (cart_id, product_id) VALUES ((SELECT id FROM carts WHERE user_id = ?), ?)") (userId, productId)
-  putStrLn $ "Товар с ID " ++ show productId ++ " добавлен в корзину."
+  -- putStrLn $ "Товар с ID " ++ show productId ++ " добавлен в корзину."
   updateTotalPrice conn userId
 
 -- Обновление общей стоимости корзины
@@ -548,7 +548,7 @@ getNameFromTable conn tableName boxId = do
 createCart :: Connection -> Int -> IO ()
 createCart conn userId = do
   execute conn (fromString "INSERT INTO carts (user_id, total_price) VALUES (?, 0)") (Only userId)
-  putStrLn "Корзина создана."
+  -- putStrLn "Корзина создана."
 
 -- Основной поток программы
 main :: IO ()
