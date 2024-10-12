@@ -36,6 +36,7 @@ mainMenu conn userId = do
 
 selectProcessor :: Connection -> Int -> IO ()
 selectProcessor conn userId = do
+  _ <- system "cls"
   -- Проверяем, есть ли материнская плата в корзине
   existingMobo <- query conn
     (fromString "SELECT box_id FROM products JOIN cart_items ON products.id = cart_items.product_id WHERE cart_id = (SELECT id FROM carts WHERE user_id = ?) AND category_id = 1")
@@ -130,6 +131,7 @@ selectProcessor conn userId = do
 
 selectMotherboard :: Connection -> Int -> IO ()
 selectMotherboard conn userId = do
+  _ <- system "cls"
   -- Проверяем, есть ли процессор и оперативная память в корзине
   existingProcessor <- query conn
     (fromString "SELECT box_id FROM products JOIN cart_items ON products.id = cart_items.product_id WHERE cart_id = (SELECT id FROM carts WHERE user_id = ?) AND category_id = 2")
@@ -260,6 +262,7 @@ selectMotherboard conn userId = do
 
 selectRam :: Connection -> Int -> IO ()
 selectRam conn userId = do
+  _ <- system "cls"
   -- Проверяем, есть ли материнская плата в корзине
   existingMobo <- query conn
     (fromString "SELECT box_id FROM products JOIN cart_items ON products.id = cart_items.product_id WHERE cart_id = (SELECT id FROM carts WHERE user_id = ?) AND category_id = 1")
@@ -309,6 +312,7 @@ selectRam conn userId = do
 -- Выбор видеокарты
 selectGraphicsCard :: Connection -> Int -> IO ()
 selectGraphicsCard conn userId = do
+  _ <- system "cls"
   gpus <- query_ conn (fromString "SELECT id, name, memory_size, memory_type, core_clock_speed, price FROM graphics_cards") :: IO [(Int, String, Int, String, Double, Int)]
   putStrLn "Список доступных видеокарт:"
   mapM_ (\(gpuId, name, memory_size, memory_type, core_clock_speed, price) ->
@@ -327,6 +331,7 @@ selectGraphicsCard conn userId = do
 -- Выбор блока питания
 selectPowerSupply :: Connection -> Int -> IO ()
 selectPowerSupply conn userId = do
+  _ <- system "cls"
   psus <- query_ conn (fromString "SELECT id, name, wattage, efficiency_rating, form_factor, price FROM power_supplies") :: IO [(Int, String, Int, String, String, Int)]
   putStrLn "Список доступных блоков питания:"
   mapM_ (\(psuId, name, wattage, efficiency_rating, form_factor, price) ->
@@ -345,6 +350,7 @@ selectPowerSupply conn userId = do
 -- Выбор накопителя
 selectStorage :: Connection -> Int -> IO ()
 selectStorage conn userId = do
+  _ <- system "cls"
   storages <- query_ conn (fromString "SELECT id, name, type, capacity, interface, price FROM storage") :: IO [(Int, String, String, Int, String, Int)]
   putStrLn "Список доступных накопителей:"
   mapM_ (\(storageId, name, stype, capacity, interface, price) ->
@@ -481,7 +487,6 @@ updateTotalPrice conn userId = do
 -- Просмотр корзины
 viewCart :: Connection -> Int -> IO ()
 viewCart conn userId = do
-  -- Очищаем консоль для Windows
   _ <- system "cls"
 
   putStrLn "----------------"
