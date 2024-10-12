@@ -68,7 +68,7 @@ executable computerStore
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.17.2.1, sqlite-simple, text, directory
+    build-depends:    base ^>=4.17.2.1, sqlite-simple, text, directory, process
 
     -- Directories containing source files.
     hs-source-dirs:   exe, src
