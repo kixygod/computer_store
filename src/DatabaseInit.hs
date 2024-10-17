@@ -77,13 +77,13 @@ initializeDB = do
     "('ASUS ROG Maximus XIII Hero', 'LGA1200', 'ATX', 'DDR4', 4, 5, 128), " ++
     "('MSI MPG Z590 Gaming Carbon WiFi', 'LGA1200', 'ATX', 'DDR4', 4, 6, 128), " ++
     "('Gigabyte Z590 AORUS Ultra', 'LGA1200', 'ATX', 'DDR4', 4, 4, 128), " ++
-    "('ASUS TUF Gaming X570-Plus', 'AM4', 'ATX', 'DDR4', 4, 5, 128), " ++
-    "('MSI MAG B550 TOMAHAWK', 'AM4', 'ATX', 'DDR4', 4, 6, 128), " ++
+    "('ASUS ROG Strix Z690-E Gaming', 'LGA1700', 'ATX', 'DDR5', 4, 5, 128), " ++  -- DDR5
+    "('MSI MAG Z690 TOMAHAWK WiFi', 'LGA1700', 'ATX', 'DDR5', 4, 6, 128), " ++  -- DDR5
     "('ASRock B450M Steel Legend', 'AM4', 'Micro-ATX', 'DDR4', 4, 4, 64), " ++
     "('Gigabyte X570 AORUS Master', 'AM4', 'ATX', 'DDR4', 4, 4, 128), " ++
     "('ASUS Prime Z390-A', 'LGA1151', 'ATX', 'DDR4', 4, 5, 64), " ++
-    "('MSI Z490-A PRO', 'LGA1200', 'ATX', 'DDR4', 4, 6, 128), " ++
-    "('Gigabyte B460M DS3H', 'LGA1200', 'Micro-ATX', 'DDR4', 2, 4, 64), " ++
+    "('MSI MPG Z690 Force WiFi', 'LGA1700', 'ATX', 'DDR5', 4, 6, 128), " ++  -- DDR5
+    "('Gigabyte Z690 AORUS Pro', 'LGA1700', 'ATX', 'DDR5', 4, 4, 128), " ++  -- DDR5
     "('ASUS ROG Strix Z490-E Gaming', 'LGA1200', 'ATX', 'DDR4', 4, 5, 128), " ++
     "('MSI MEG X570 Unify', 'AM4', 'ATX', 'DDR4', 4, 6, 128), " ++
     "('Gigabyte B550M AORUS Elite', 'AM4', 'Micro-ATX', 'DDR4', 4, 4, 128), " ++
@@ -95,19 +95,19 @@ initializeDB = do
     "('MSI TRX40 PRO 10G', 'sTRX4', 'ATX', 'DDR4', 8, 6, 256), " ++
     "('Gigabyte TRX40 AORUS Master', 'sTRX4', 'ATX', 'DDR4', 8, 4, 256);")
 
-  -- Добавление в таблицу Товары (category_id = 1)
+-- Добавление в таблицу Товары (category_id = 1)
   execute_ conn (fromString $
     "INSERT INTO products (category_id, box_id, price) VALUES " ++
     "(1, 1, 35000), " ++   -- ASUS ROG Maximus XIII Hero
     "(1, 2, 27000), " ++   -- MSI MPG Z590 Gaming Carbon WiFi
     "(1, 3, 32000), " ++   -- Gigabyte Z590 AORUS Ultra
-    "(1, 4, 22000), " ++   -- ASUS TUF Gaming X570-Plus
-    "(1, 5, 19000), " ++   -- MSI MAG B550 TOMAHAWK
+    "(1, 4, 40000), " ++   -- ASUS ROG Strix Z690-E Gaming DDR5
+    "(1, 5, 38000), " ++   -- MSI MAG Z690 TOMAHAWK WiFi DDR5
     "(1, 6, 12000), " ++   -- ASRock B450M Steel Legend
     "(1, 7, 30000), " ++   -- Gigabyte X570 AORUS Master
     "(1, 8, 18000), " ++   -- ASUS Prime Z390-A
-    "(1, 9, 15000), " ++   -- MSI Z490-A PRO
-    "(1, 10, 9000), " ++   -- Gigabyte B460M DS3H
+    "(1, 9, 42000), " ++   -- MSI MPG Z690 Force WiFi DDR5
+    "(1, 10, 44000), " ++  -- Gigabyte Z690 AORUS Pro DDR5
     "(1, 11, 26000), " ++  -- ASUS ROG Strix Z490-E Gaming
     "(1, 12, 23000), " ++  -- MSI MEG X570 Unify
     "(1, 13, 14000), " ++  -- Gigabyte B550M AORUS Elite
@@ -122,29 +122,29 @@ initializeDB = do
 
   -- Процессоры
   execute_ conn (fromString $
-    "INSERT INTO processors (name, cores, clock_speed, socket_type, manufacture_id) VALUES " ++
-    "('Intel Core i9-12900K', 16, 3.2, 'LGA1200', 1), " ++
-    "('Intel Core i7-12700K', 12, 3.6, 'LGA1200', 1), " ++
-    "('Intel Core i5-12600K', 10, 3.7, 'LGA1200', 1), " ++
-    "('AMD Ryzen 9 5950X', 16, 3.4, 'AM4', 2), " ++
-    "('AMD Ryzen 7 5800X', 8, 3.8, 'AM4', 2), " ++
-    "('AMD Ryzen 5 5600X', 6, 3.7, 'AM4', 2), " ++
-    "('Intel Core i9-11900K', 8, 3.5, 'LGA1200', 1), " ++
-    "('Intel Core i7-11700K', 8, 3.6, 'LGA1200', 1), " ++
-    "('Intel Core i5-11600K', 6, 3.9, 'LGA1200', 1), " ++
-    "('AMD Ryzen 9 5900X', 12, 3.7, 'AM4', 2), " ++
-    "('AMD Ryzen 7 5700G', 8, 3.8, 'AM4', 2), " ++
-    "('Intel Core i5-6500', 4, 3.2, 'LGA1151', 1), " ++
-    "('AMD Ryzen 5 3500X', 6, 3.6, 'AM4', 2), " ++
-    "('AMD Ryzen Threadripper 3960X', 24, 3.8, 'sTRX4', 2), " ++
-    "('Intel Xeon W-2295', 18, 3.0, 'LGA2066', 1), " ++
-    "('AMD Ryzen 5 3400G', 4, 3.7, 'AM4', 2), " ++
-    "('Intel Core i9-10900X', 10, 3.7, 'LGA2066', 1), " ++
-    "('AMD Ryzen 3 3100', 4, 3.6, 'AM4', 2), " ++
-    "('Intel Core i7-10700K', 8, 3.8, 'LGA1200', 1), " ++
-    "('AMD Ryzen Threadripper 3990X', 64, 2.9, 'sTRX4', 2);")
+    "INSERT INTO processors (component_id, name, manufacture_id, socket_type, clock_speed, cores) VALUES " ++
+    "(1, 'Intel Core i9-12900K', 1, 'LGA1700', 3.2, 16), " ++
+    "(2, 'Intel Core i7-12700K', 1, 'LGA1700', 3.6, 12), " ++
+    "(3, 'Intel Core i5-12600K', 1, 'LGA1700', 3.7, 10), " ++
+    "(4, 'AMD Ryzen 9 5950X', 2, 'AM4', 3.4, 16), " ++
+    "(5, 'AMD Ryzen 7 5800X', 2, 'AM4', 3.8, 8), " ++
+    "(6, 'AMD Ryzen 5 5600X', 2, 'AM4', 3.7, 6), " ++
+    "(7, 'Intel Core i9-11900K', 1, 'LGA1200', 3.5, 8), " ++
+    "(8, 'Intel Core i7-11700K', 1, 'LGA1200', 3.6, 8), " ++
+    "(9, 'Intel Core i5-11600K', 1, 'LGA1200', 3.9, 6), " ++
+    "(10, 'AMD Ryzen 9 5900X', 2, 'AM4', 3.7, 12), " ++
+    "(11, 'AMD Ryzen 7 5700G', 2, 'AM4', 3.8, 8), " ++
+    "(12, 'Intel Core i5-6500', 1, 'LGA1151', 3.2, 4), " ++
+    "(13, 'AMD Ryzen 5 3500X', 2, 'AM4', 3.6, 6), " ++
+    "(14, 'AMD Ryzen Threadripper 3960X', 2, 'sTRX4', 3.8, 24), " ++
+    "(15, 'Intel Xeon W-2295', 1, 'LGA2066', 3.0, 18), " ++
+    "(16, 'AMD Ryzen 5 3400G', 2, 'AM4', 3.7, 4), " ++
+    "(17, 'Intel Core i9-10900X', 1, 'LGA2066', 3.7, 10), " ++
+    "(18, 'AMD Ryzen 3 3100', 2, 'AM4', 3.6, 4), " ++
+    "(19, 'Intel Core i7-10700K', 1, 'LGA1200', 3.8, 8), " ++
+    "(20, 'AMD Ryzen Threadripper 3990X', 2, 'sTRX4', 2.9, 64);")
 
-  -- Добавление в таблицу Товары (category_id = 2)
+-- Добавление в таблицу Товары (category_id = 2)
   execute_ conn (fromString $
     "INSERT INTO products (category_id, box_id, price) VALUES " ++
     "(2, 1, 53000), " ++    -- Intel Core i9-12900K
@@ -175,44 +175,44 @@ initializeDB = do
     "('Corsair Vengeance LPX 16GB', 'DDR4', 16, 3200, 7), " ++
     "('Kingston HyperX Fury 16GB', 'DDR4', 16, 3200, 8), " ++
     "('G.Skill Trident Z RGB 32GB', 'DDR4', 32, 3600, 7), " ++
-    "('Corsair Dominator Platinum RGB 16GB', 'DDR4', 16, 3600, 7), " ++
-    "('G.Skill Ripjaws V 16GB', 'DDR4', 16, 3200, 7), " ++
+    "('Corsair Dominator Platinum RGB 16GB', 'DDR5', 16, 4800, 7), " ++   -- DDR5
+    "('G.Skill Ripjaws V 16GB', 'DDR5', 16, 5200, 7), " ++               -- DDR5
     "('Kingston HyperX Predator 32GB', 'DDR4', 32, 3600, 8), " ++
     "('Corsair Vengeance RGB Pro 32GB', 'DDR4', 32, 3200, 7), " ++
     "('G.Skill Trident Z Neo 64GB', 'DDR4', 64, 3600, 7), " ++
-    "('Kingston Fury Beast 16GB', 'DDR4', 16, 3000, 8), " ++
+    "('Kingston Fury Beast 16GB', 'DDR5', 16, 5200, 8), " ++              -- DDR5
     "('Corsair Vengeance LPX 8GB', 'DDR4', 8, 3200, 7), " ++
     "('G.Skill Ripjaws V 32GB', 'DDR4', 32, 3600, 7), " ++
-    "('Kingston Fury Renegade 64GB', 'DDR4', 64, 3600, 8), " ++
+    "('Kingston Fury Renegade 64GB', 'DDR5', 64, 6000, 8), " ++           -- DDR5
     "('Corsair Dominator Platinum RGB 32GB', 'DDR4', 32, 3200, 7), " ++
-    "('G.Skill Trident Z RGB 16GB', 'DDR4', 16, 3000, 7), " ++
+    "('G.Skill Trident Z RGB 32GB', 'DDR5', 32, 6000, 7), " ++            -- DDR5 (здесь был DDR3)
     "('Kingston Fury Beast 32GB', 'DDR4', 32, 3200, 8), " ++
     "('Corsair Vengeance RGB Pro 64GB', 'DDR4', 64, 3600, 7), " ++
-    "('G.Skill Ripjaws V 8GB', 'DDR4', 8, 3000, 7), " ++
+    "('G.Skill Ripjaws V 32GB', 'DDR5', 32, 6000, 7), " ++                -- DDR5 (здесь был DDR3)
     "('Corsair Vengeance LPX 32GB', 'DDR4', 32, 3600, 7), " ++
     "('Kingston HyperX Fury 8GB', 'DDR4', 8, 2400, 8), " ++
     "('G.Skill Trident Z Neo 32GB', 'DDR4', 32, 3200, 7);")
 
-  -- Добавление в таблицу Товары (category_id = 3)
+-- Добавление в таблицу Товары (category_id = 3)
   execute_ conn (fromString $
     "INSERT INTO products (category_id, box_id, price) VALUES " ++
     "(3, 1, 7000), " ++    -- Corsair Vengeance LPX 16GB
     "(3, 2, 6500), " ++    -- Kingston HyperX Fury 16GB
     "(3, 3, 14000), " ++   -- G.Skill Trident Z RGB 32GB
-    "(3, 4, 12000), " ++   -- Corsair Dominator Platinum RGB 16GB
-    "(3, 5, 7200), " ++    -- G.Skill Ripjaws V 16GB
+    "(3, 4, 24000), " ++   -- Corsair Dominator Platinum RGB 16GB DDR5
+    "(3, 5, 26000), " ++   -- G.Skill Ripjaws V 16GB DDR5
     "(3, 6, 16000), " ++   -- Kingston HyperX Predator 32GB
     "(3, 7, 14500), " ++   -- Corsair Vengeance RGB Pro 32GB
     "(3, 8, 34000), " ++   -- G.Skill Trident Z Neo 64GB
-    "(3, 9, 6000), " ++    -- Kingston Fury Beast 16GB
+    "(3, 9, 24000), " ++   -- Kingston Fury Beast 16GB DDR5
     "(3, 10, 3500), " ++   -- Corsair Vengeance LPX 8GB
     "(3, 11, 15000), " ++  -- G.Skill Ripjaws V 32GB
-    "(3, 12, 33000), " ++  -- Kingston Fury Renegade 64GB
+    "(3, 12, 60000), " ++  -- Kingston Fury Renegade 64GB DDR5
     "(3, 13, 17000), " ++  -- Corsair Dominator Platinum RGB 32GB
-    "(3, 14, 10000), " ++  -- G.Skill Trident Z RGB 16GB
+    "(3, 14, 45000), " ++  -- G.Skill Trident Z RGB 32GB DDR5
     "(3, 15, 12500), " ++  -- Kingston Fury Beast 32GB
     "(3, 16, 32000), " ++  -- Corsair Vengeance RGB Pro 64GB
-    "(3, 17, 3000), " ++   -- G.Skill Ripjaws V 8GB
+    "(3, 17, 60000), " ++  -- G.Skill Ripjaws V 32GB DDR5
     "(3, 18, 15000), " ++  -- Corsair Vengeance LPX 32GB
     "(3, 19, 4000), " ++   -- Kingston HyperX Fury 8GB
     "(3, 20, 18000);"      -- G.Skill Trident Z Neo 32GB
